@@ -251,10 +251,6 @@ void ReplicatedMergeTreeBlockOutputStream::commitPart(zkutil::ZooKeeperPtr & zoo
         throw Exception("Cannot allocate block number in ZooKeeper: " + e.displayText(), ErrorCodes::KEEPER_EXCEPTION);
     }
 
-    static std::atomic<int> counter = 0;
-    if (counter++ % 3 == 0)
-        sleep(1);
-
     /// Set part attributes according to part_number. Prepare an entry for log.
 
     part->info.min_block = block_number;
